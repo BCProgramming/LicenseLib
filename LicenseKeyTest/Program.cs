@@ -12,24 +12,24 @@ namespace LicenseKeyTest
         static void Main(string[] args)
         {
 
-            LicenseKey lk = new LicenseKey();
+            StandardKey lk = new StandardKey();
             lk.ExpiryDate = DateTime.Now.AddMonths(1);
-            lk.LicensedEdition = LicenseKey.Edition.Professional;
+            lk.LicensedEdition = StandardKey.Edition.Professional;
             lk.LicensedUsers = 50;
             lk.LicensedMajorVersion = 8;
             lk.LicensedMinorVersion = 2;
-            String sKey = CryptHelper.InsertDashes(LicenseHandler.ToProductCode<LicenseKey>(lk, CryptHelper.LocalMachineID));
+            String sKey = CryptHelper.InsertDashes(LicenseHandler.ToProductCode<StandardKey>(lk, CryptHelper.LocalMachineID));
             Console.WriteLine(lk);
             Console.WriteLine("Generated Product Key:" + sKey);
             Console.WriteLine("Decrypting Product Key...");
-            LicenseKey decryptKey = LicenseHandler.FromProductCode<LicenseKey>(sKey, CryptHelper.LocalMachineID);
+            StandardKey decryptKey = LicenseHandler.FromProductCode<StandardKey>(sKey, CryptHelper.LocalMachineID);
 
             Console.WriteLine("Decrypted Result:" + decryptKey.ToString());
             sKey = "5" + sKey.Substring(1);
             Console.WriteLine("Changed one character in key- using " + sKey);
             try
             {
-                LicenseKey faildecrypt = LicenseHandler.FromProductCode<LicenseKey>(sKey, CryptHelper.LocalMachineID);
+                StandardKey faildecrypt = LicenseHandler.FromProductCode<StandardKey>(sKey, CryptHelper.LocalMachineID);
             }
             catch (Exception exx)
             {

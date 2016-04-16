@@ -88,9 +88,7 @@ namespace BASeCamp.Licensing
             byte[] readresults = new byte[ms.Length];
             ms.Read(readresults, 0, readresults.Length);
             //We need a specific amount of data for the key and Initial Vector of the 
-            //encryption algorithm, so we'll use the PasswordDeriveBytes class to 
-            //salt the data. 
-            //the current salt is hard coded, but it could also be made to use some sort of machine-specific value.
+            //encryption algorithm, so we'll use the PasswordDeriveBytes class to salt the data. 
             Rfc2898DeriveBytes pdb = GetPdb(password);
 
             return Encrypt(clearData, pdb.GetBytes(8), pdb.GetBytes(8));
